@@ -9,7 +9,7 @@ import com.prova4.dtos.inputsdto.ProdutoInput;
 import com.prova4.dtos.model.EmpresaListModel;
 import com.prova4.dtos.model.EmpresaModel;
 import com.prova4.dtos.model.ProdutoModel;
-import com.prova4.produto.Produto;
+import com.prova4.dtos.model.ProdutoResumoModel;
 import com.prova4.produto.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -56,10 +56,18 @@ public class EmpresaController {
     return empresaRepository.save(empresaDisassembler.toEntity(empresaInput));
   }
 
-  @PostMapping("/{empresaId}/produto")
-  public ProdutoModel save(@RequestBody ProdutoInput produtoInput, @PathVariable Long empresaId) {
-    var produto = produtoService.salvar(empresaId, produtoDisassembler.toEntity(produtoInput));
+  @PostMapping("/{empresaId}/produto/{produtoId}")
+  public ProdutoModel findByIdProduto(@PathVariable Long empresaId, @PathVariable Long produtoId) {
+    empresaService.findOrFail(empresaId);
+    var produto = produtoService.findOrFail(produtoId);
     return produtoAssembler.toModel(produto);
   }
+
+  @PostMapping("/{empresaId}/produto")
+  public ProdutoResumoModel saveProduto(@RequestBody ProdutoInput produtoInput, @PathVariable Long empresaId) {
+    var produto = produtoService.salvar(empresaId, produtoDisassembler.toEntity(produtoInput));
+    return produtoAssembler.toResumoModel(produto);
+  }
+
 }
 

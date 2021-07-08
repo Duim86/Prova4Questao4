@@ -1,7 +1,6 @@
 package com.prova4.dtos.assembler.produto;
 
 import com.prova4.dtos.inputsdto.ProdutoInput;
-import com.prova4.dtos.model.ProdutoModel;
 import com.prova4.produto.Produto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

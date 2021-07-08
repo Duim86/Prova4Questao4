@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -18,6 +19,7 @@ public class Produto {
   @EqualsAndHashCode.Include
   private Long id;
   private String nome;
+  private BigDecimal preco;
 
   @ManyToOne
   private Empresa empresa;
