@@ -21,8 +21,8 @@ public class ProdutoService {
     return produtoRepository.save(produto);
   }
 
-  public Produto findOrFail(Long produtoId) {
-    return produtoRepository.findById(produtoId)
-            .orElseThrow(() -> new IllegalStateException("Empresa de id " + produtoId + " não encontrada"));
+  public Produto findOrFail(Long produtoId, Long empresaId) {
+    return produtoRepository.findByIdAndEmpresaId(produtoId, empresaId)
+            .orElseThrow(() -> new IllegalStateException("Produto não encontrado"));
   }
 }

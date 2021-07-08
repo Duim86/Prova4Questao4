@@ -57,9 +57,9 @@ public class EmpresaController {
   }
 
   @PostMapping("/{empresaId}/produto/{produtoId}")
-  public ProdutoModel findByIdProduto(@PathVariable Long empresaId, @PathVariable Long produtoId) {
+  public ProdutoModel findByIdProduto(@PathVariable Long produtoId, @PathVariable Long empresaId) {
     empresaService.findOrFail(empresaId);
-    var produto = produtoService.findOrFail(produtoId);
+    var produto = produtoService.findOrFail(produtoId, empresaId);
     return produtoAssembler.toModel(produto);
   }
 
